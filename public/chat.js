@@ -10,9 +10,9 @@ const input= document.getElementById('input');
 //   });
 
 
-const name= prompt("enter your name")
+let username= prompt("enter your name")
 
-socket.emit('user', name);
+socket.emit('user', username);
 socket.on('new-message', data => {
 appendMessage(`${data.name}: ${data.message}`);
 })
