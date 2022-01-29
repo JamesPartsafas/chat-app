@@ -11,8 +11,14 @@ const input = document.getElementById('input');
 
 
 let username = prompt("enter your name")
+document.getElementById('userNameDisplay').textContent = username
 
-socket.emit('user', username);
+let roomId = prompt("enter your room id")
+document.getElementById('roomIdDisplay').textContent = roomId
+
+//socket.emit('user', username);
+socket.emit('join-room', {roomId})
+
 socket.on('new-message', data => {
     appendMessage(`${data.username}: ${data.message}`);
 })
@@ -23,7 +29,7 @@ form.addEventListener('submit', e => {
     // const username = document.createElement('div');
     // username.className='fst-italic';
     appendMessage(`You: ${message}`);
-    socket.emit('chat', {username, message}); //TODO hange when auth
+    socket.emit('chat', {username, message, roomId}); //TODO hange when auth
     input.value = '';
 })
 
